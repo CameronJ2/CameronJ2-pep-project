@@ -5,6 +5,7 @@ import Model.Message;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import Service.SMService;
+import java.util.List;
 
 /**
  * TODO: You will need to write your own endpoints and handlers for your controller. The endpoints you will need can be
@@ -34,7 +35,7 @@ public class SocialMediaController {
         app.post("/register", this::registerHandler);
         app.post("/login", this::loginHandler);
         app.post("/messages", this::createMessageHandler);
-        app.get("/messages", this::exampleHandler);
+        app.get("/messages", this::getAllMessagesHandler);
         app.get("/messages/{message_id}", this::exampleHandler);
         app.delete("/messages/{message_id}", this::exampleHandler);
         app.patch("/messages/{message_id}", this::exampleHandler);
@@ -80,6 +81,11 @@ public class SocialMediaController {
         } else {
             ctx.status(400);
         }
+    }
+
+    private void getAllMessagesHandler(Context ctx){
+        List<Message> messages = SMService.getAllMessages();
+        ctx.json(messages);
     }
 
 

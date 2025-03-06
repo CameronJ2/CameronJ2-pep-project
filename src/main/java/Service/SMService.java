@@ -3,6 +3,7 @@ package Service;
 import DAO.SMDAO;
 import Model.Account;
 import Model.Message;
+import java.util.*;
 
 public class SMService {
     SMDAO SMDAO;
@@ -40,6 +41,10 @@ public class SMService {
             return null;
         }
         return SMDAO.insertMessage(message);
+    }
+
+    public List<Message> getAllMessages(){
+        return SMDAO.getAllMessages();
     }
 
 
