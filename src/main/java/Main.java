@@ -13,6 +13,7 @@ import Util.FileUtil;
  */
 public class Main {
     public static void main(String[] args) {
+        databaseSetup();
         SocialMediaController controller = new SocialMediaController();
         Javalin app = controller.startAPI();
         app.start(8080);
