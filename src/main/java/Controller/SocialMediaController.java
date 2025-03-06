@@ -1,7 +1,9 @@
 package Controller;
 
+import Model.Account;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import Service.SMService;
 
 /**
  * TODO: You will need to write your own endpoints and handlers for your controller. The endpoints you will need can be
@@ -41,6 +43,16 @@ public class SocialMediaController {
      */
     private void exampleHandler(Context context) {
         context.json("sample text");
+    }
+
+    private void registerHandler(Context ctx){
+        Account account = ctx.bodyAsClass(Account.class);
+        Account registeredAccount = SMService.register(account);
+        if (registeredAccount != null) {
+            ctx.json(registeredAccount);
+        } else {
+            ctx.status(400);
+        }
     }
 
 
