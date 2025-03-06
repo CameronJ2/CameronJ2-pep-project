@@ -29,6 +29,10 @@ public class SMService {
         return SMDAO.insertAccount(account);
     }
 
+    public Account login(Account account){
+        return SMDAO.checkValidAccount(account);
+    }
+
 }
 
 
