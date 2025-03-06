@@ -14,9 +14,23 @@ public class SocialMediaController {
      * suite must receive a Javalin object from this method.
      * @return a Javalin app object which defines the behavior of the Javalin controller.
      */
+    // public Javalin startAPI() {
+    //     Javalin app = Javalin.create();
+    //     app.get("example-endpoint", this::exampleHandler);
+
+    //     return app;
+    // }
     public Javalin startAPI() {
         Javalin app = Javalin.create();
-        app.get("example-endpoint", this::exampleHandler);
+        app.post("/register", this::exampleHandler);
+        app.post("/login", this::exampleHandler);
+        app.post("/messages", this::exampleHandler);
+        app.get("/messages", this::exampleHandler);
+        app.get("/messages/{message_id}", this::exampleHandler);
+        app.delete("/messages/{message_id}", this::exampleHandler);
+        app.patch("/messages/{message_id}", this::exampleHandler);
+        app.patch("/accounts/{account_id}/messages", this::exampleHandler);
+
 
         return app;
     }
