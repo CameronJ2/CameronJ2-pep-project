@@ -51,6 +51,10 @@ public class SMService {
         return SMDAO.getMessageById(id);
     }
 
+    public Message deleteMessage(int id){
+        return SMDAO.deleteMessage(id);
+    }
+
 
 
 }

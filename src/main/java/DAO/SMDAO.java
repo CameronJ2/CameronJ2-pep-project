@@ -165,4 +165,31 @@ public class SMDAO {
         return null;
     }
 
+    public Message deleteMessage(int id){
+        Connection connection = ConnectionUtil.getConnection();
+        try {
+            String sql1 = "select * from message where message_id = ?;";
+            PreparedStatement preparedStatement1 = connection.prepareStatement(sql1);
+            preparedStatement1.setInt(1, id);
+            ResultSet rs = preparedStatement1.executeQuery();
+
+            String sql2 = "delete from message where message_id = ?;";
+            PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
+            preparedStatement2.setInt(1, id);
+            preparedStatement2.executeUpdate();
+
+            if (rs.next()) {
+                return new Message(
+                    rs.getInt("message_id"),
+                    rs.getInt("posted_by"),
+                    rs.getString("message_text"),
+                    rs.getLong("time_posted_epoch")
+                );
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
 }
