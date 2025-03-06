@@ -1,8 +1,5 @@
 package DAO;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.*;
 
 
@@ -34,4 +31,31 @@ public class SMDAO {
             }
         return null;
     }
+
+    // Need an account getter for validation in registering new users.
+    public Account getAccountByUsername(String username){
+        Connection connection = ConnectionUtil.getConnection();
+        try {
+            //Write SQL logic here. When inserting, you only need to define the departure_city and arrival_city
+            //values (two columns total!)
+            String sql = "select * from account where username = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            //write preparedStatement's setString and setInt methods here.
+            preparedStatement.setString(1, username);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                return new Account(
+                    rs.getInt("account_id"),
+                    rs.getString("username"),
+                    rs.getString("password")
+                );
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    return null;
+}
 }

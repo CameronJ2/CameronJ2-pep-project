@@ -22,9 +22,15 @@ public class SocialMediaController {
 
     //     return app;
     // }
+
+    SMService SMService;
+    public SocialMediaController(){
+        SMService = new SMService();
+    }
+
     public Javalin startAPI() {
         Javalin app = Javalin.create();
-        app.post("/register", this::exampleHandler);
+        app.post("/register", this::registerHandler);
         app.post("/login", this::exampleHandler);
         app.post("/messages", this::exampleHandler);
         app.get("/messages", this::exampleHandler);
