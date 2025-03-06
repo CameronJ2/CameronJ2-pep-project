@@ -55,6 +55,14 @@ public class SMService {
         return SMDAO.deleteMessage(id);
     }
 
+    public Message updateMessage(int id, String messageText){
+        if (messageText.equals("") || messageText.length() > 255 || SMDAO.getMessageById(id) == null){
+            return null;
+        }
+        SMDAO.updateMessage(id, messageText);
+        return SMDAO.getMessageById(id);
+    }
+
 
 
 }
