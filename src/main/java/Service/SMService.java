@@ -47,6 +47,10 @@ public class SMService {
         return SMDAO.getAllMessages();
     }
 
+    public Message getMessageById(int id){
+        return SMDAO.getMessageById(id);
+    }
+
 
 
 }
