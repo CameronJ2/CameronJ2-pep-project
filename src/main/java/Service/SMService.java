@@ -2,6 +2,7 @@ package Service;
 
 import DAO.SMDAO;
 import Model.Account;
+import Model.Message;
 
 public class SMService {
     SMDAO SMDAO;
@@ -32,6 +33,16 @@ public class SMService {
     public Account login(Account account){
         return SMDAO.checkValidAccount(account);
     }
+
+
+    public Message createMessage(Message message){
+        if (message.message_text.equals("") || message.message_text.length() > 255 || SMDAO.getAccountById(message.getPosted_by()) == null){
+            return null;
+        }
+        return SMDAO.insertMessage(message);
+    }
+
+
 
 }
 

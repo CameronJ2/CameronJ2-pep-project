@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Account;
+import Model.Message;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 import Service.SMService;
@@ -32,7 +33,7 @@ public class SocialMediaController {
         Javalin app = Javalin.create();
         app.post("/register", this::registerHandler);
         app.post("/login", this::loginHandler);
-        app.post("/messages", this::exampleHandler);
+        app.post("/messages", this::createMessageHandler);
         app.get("/messages", this::exampleHandler);
         app.get("/messages/{message_id}", this::exampleHandler);
         app.delete("/messages/{message_id}", this::exampleHandler);
@@ -68,6 +69,16 @@ public class SocialMediaController {
             ctx.json(loggedInAccount);
         } else {
             ctx.status(401);
+        }
+    }
+
+    private void createMessageHandler(Context ctx){
+        Message message = ctx.bodyAsClass(Message.class);
+        Message createdMessage = SMService.createMessage(message);
+        if (createdMessage != null) {
+            ctx.json(createdMessage);
+        } else {
+            ctx.status(400);
         }
     }
 
