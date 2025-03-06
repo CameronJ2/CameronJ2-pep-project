@@ -63,6 +63,10 @@ public class SMService {
         return SMDAO.getMessageById(id);
     }
 
+    public List<Message> getMessagesFromUser(int id){
+        return SMDAO.getAllMessagesFromUser(id);
+    }
+
 
 
 }
